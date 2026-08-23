@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Free BMI Calculator. Calculate your Body Mass Index using your height and weight.">
+  <meta name="robots" content="index, follow">
+
+  <title>BMI Calculator - Toolora</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f8fb;
+      color: #172033;
+      line-height: 1.6;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav {
+      max-width: 850px;
+      margin: auto;
+      padding: 16px 20px;
+    }
+
+    .logo {
+      color: #2563eb;
+      font-size: 25px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #64748b;
+    }
+
+    .tool-box,
+    .content {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 25px;
+    }
+
+    .tool-box {
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .field input:focus {
+      border-color: #2563eb;
+    }
+
+    .calculate {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .calculate:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      display: none;
+      margin-top: 25px;
+      padding: 22px;
+      border-radius: 12px;
+      background: #eff6ff;
+      text-align: center;
+    }
+
+    .bmi-number {
+      font-size: 42px;
+      font-weight: 800;
+      margin: 8px 0;
+      color: #2563eb;
+    }
+
+    .category {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .error {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #fee2e2;
+      color: #b91c1c;
+      text-align: center;
+    }
+
+    .note {
+      margin-top: 18px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #f8fafc;
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    .content {
+      margin-top: 25px;
+    }
+
+    .content h2 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .content h2:first-child {
+      margin-top: 0;
+    }
+
+    .content p {
+      color: #475569;
+      margin-bottom: 12px;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    .table th,
+    .table td {
+      border: 1px solid #e5e7eb;
+      padding: 10px;
+      text-align: left;
+    }
+
+    .table th {
+      background: #f8fafc;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 25px;
+      text-align: center;
+      background: white;
+      color: #64748b;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .tool-box,
+      .content {
+        padding: 20px;
+      }
+
+      .bmi-number {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="/">Toolora</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <a class="back" href="/">← Back to Toolora</a>
+
+  <section class="hero">
+    <h1>BMI Calculator</h1>
+    <p>Calculate your Body Mass Index using your height and weight.</p>
+  </section>
+
+  <section class="tool-box">
+
+    <div class="field">
+      <label for="weight">
+        Weight (kg)
+      </label>
+
+      <input
+        type="number"
+        id="weight"
+        min="1"
+        step="0.1"
+        placeholder="Example: 70"
+      >
+    </div>
+
+    <div class="field">
+      <label for="height">
+        Height (cm)
+      </label>
+
+      <input
+        type="number"
+        id="height"
+        min="50"
+        step="0.1"
+        placeholder="Example: 175"
+      >
+    </div>
+
+    <button
+      class="calculate"
+      onclick="calculateBMI()"
+    >
+      Calculate BMI
+    </button>
+
+    <div class="error" id="error"></div>
+
+    <div class="result" id="result">
+
+      <div>Your BMI is</div>
+
+      <div
+        class="bmi-number"
+        id="bmiNumber"
+      >
+        0
+      </div>
+
+      <div
+        class="category"
+        id="category"
+      >
+        -
+      </div>
+
+      <div class="note">
+        BMI is a general screening measure and does not
+        diagnose health conditions.
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="content">
+
+    <h2>What is BMI?</h2>
+
+    <p>
+      Body Mass Index (BMI) is a number calculated from a
+      person's weight and height. It is commonly used as a
+      general screening measure.
+    </p>
+
+    <h2>BMI Categories for Adults</h2>
+
+    <table class="table">
+      <tr>
+        <th>BMI</th>
+        <th>Category</th>
+      </tr>
+
+      <tr>
+        <td>Below 18.5</td>
+        <td>Underweight</td>
+      </tr>
+
+      <tr>
+        <td>18.5 – 24.9</td>
+        <td>Healthy weight</td>
+      </tr>
+
+      <tr>
+        <td>25.0 – 29.9</td>
+        <td>Overweight</td>
+      </tr>
+
+      <tr>
+        <td>30.0 or higher</td>
+        <td>Obesity</td>
+      </tr>
+    </table>
+
+    <h2>How to Calculate BMI</h2>
+
+    <p>
+      BMI is calculated by dividing weight in kilograms by
+      height in meters squared.
+    </p>
+
+    <p>
+      <strong>BMI = Weight (kg) ÷ Height² (m)</strong>
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <p>
+      <strong>Is BMI accurate for everyone?</strong><br>
+      BMI is a general screening measure and may not accurately
+      represent body composition for every person.
+    </p>
+
+    <p>
+      <strong>Is this BMI calculator free?</strong><br>
+      Yes. Toolora's BMI Calculator is free to use.
+    </p>
+
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Toolora. Free online tools.</p>
+</footer>
+
+<script>
+
+function calculateBMI() {
+
+  const weight =
+    parseFloat(
+      document.getElementById("weight").value
+    );
+
+  const heightCm =
+    parseFloat(
+      document.getElementById("height").value
+    );
+
+  const error =
+    document.getElementById("error");
+
+  const result =
+    document.getElementById("result");
+
+  error.style.display = "none";
+  result.style.display = "none";
+
+  if (
+    isNaN(weight) ||
+    isNaN(heightCm) ||
+    weight <= 0 ||
+    heightCm <= 0
+  ) {
+
+    error.textContent =
+      "Please enter a valid weight and height.";
+
+    error.style.display = "block";
+
+    return;
+  }
+
+  const heightM =
+    heightCm / 100;
+
+  const bmi =
+    weight / (heightM * heightM);
+
+  let category = "";
+
+  if (bmi < 18.5) {
+    category = "Underweight";
+  } else if (bmi < 25) {
+    category = "Healthy weight";
+  } else if (bmi < 30) {
+    category = "Overweight";
+  } else {
+    category = "Obesity";
+  }
+
+  document.getElementById("bmiNumber").textContent =
+    bmi.toFixed(1);
+
+  document.getElementById("category").textContent =
+    category;
+
+  result.style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
