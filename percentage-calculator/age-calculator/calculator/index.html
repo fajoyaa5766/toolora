@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Free online calculator for addition, subtraction, multiplication and division.">
+  <meta name="robots" content="index, follow">
+
+  <title>Calculator - Toolora</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f8fb;
+      color: #172033;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav {
+      max-width: 900px;
+      margin: auto;
+      padding: 16px 20px;
+    }
+
+    .logo {
+      color: #2563eb;
+      font-size: 25px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .intro {
+      text-align: center;
+      color: #64748b;
+      margin-bottom: 25px;
+    }
+
+    .calculator {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    #display {
+      width: 100%;
+      padding: 18px;
+      font-size: 28px;
+      text-align: right;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      padding: 18px 10px;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      background: #f1f5f9;
+    }
+
+    button:hover {
+      background: #e2e8f0;
+    }
+
+    .operator {
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-weight: bold;
+    }
+
+    .equal {
+      background: #2563eb;
+      color: white;
+      font-weight: bold;
+    }
+
+    .clear {
+      background: #fee2e2;
+      color: #b91c1c;
+      font-weight: bold;
+    }
+
+    .content {
+      margin-top: 25px;
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .content h2 {
+      margin-bottom: 10px;
+      margin-top: 20px;
+    }
+
+    .content h2:first-child {
+      margin-top: 0;
+    }
+
+    .content p {
+      color: #475569;
+      line-height: 1.6;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 25px;
+      text-align: center;
+      background: white;
+      color: #64748b;
+      border-top: 1px solid #e5e7eb;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="/">Toolora</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <a class="back" href="/">← Back to Toolora</a>
+
+  <h1>Calculator</h1>
+
+  <p class="intro">
+    A simple and fast online calculator.
+  </p>
+
+  <div class="calculator">
+
+    <input
+      type="text"
+      id="display"
+      value="0"
+      readonly
+    >
+
+    <div class="buttons">
+
+      <button class="clear" onclick="clearDisplay()">C</button>
+      <button onclick="deleteLast()">⌫</button>
+      <button class="operator" onclick="addToDisplay('%')">%</button>
+      <button class="operator" onclick="addToDisplay('/')">÷</button>
+
+      <button onclick="addToDisplay('7')">7</button>
+      <button onclick="addToDisplay('8')">8</button>
+      <button onclick="addToDisplay('9')">9</button>
+      <button class="operator" onclick="addToDisplay('*')">×</button>
+
+      <button onclick="addToDisplay('4')">4</button>
+      <button onclick="addToDisplay('5')">5</button>
+      <button onclick="addToDisplay('6')">6</button>
+      <button class="operator" onclick="addToDisplay('-')">−</button>
+
+      <button onclick="addToDisplay('1')">1</button>
+      <button onclick="addToDisplay('2')">2</button>
+      <button onclick="addToDisplay('3')">3</button>
+      <button class="operator" onclick="addToDisplay('+')">+</button>
+
+      <button onclick="addToDisplay('0')">0</button>
+      <button onclick="addToDisplay('.')">.</button>
+      <button class="equal" onclick="calculate()">=</button>
+
+    </div>
+
+  </div>
+
+  <section class="content">
+
+    <h2>What is an Online Calculator?</h2>
+
+    <p>
+      An online calculator is a useful tool for performing basic
+      mathematical calculations such as addition, subtraction,
+      multiplication and division.
+    </p>
+
+    <h2>How to Use This Calculator</h2>
+
+    <p>
+      Click the numbers and mathematical operators to create your
+      calculation. Press the equals button to see the result.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <p>
+      <strong>Is this calculator free?</strong><br>
+      Yes. Toolora's calculator is completely free to use.
+    </p>
+
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Toolora. Free online tools.</p>
+</footer>
+
+<script>
+  const display = document.getElementById("display");
+
+  function addToDisplay(value) {
+    if (display.value === "0" && value !== ".") {
+      display.value = value;
+    } else {
+      display.value += value;
+    }
+  }
+
+  function clearDisplay() {
+    display.value = "0";
+  }
+
+  function deleteLast() {
+    if (display.value.length <= 1) {
+      display.value = "0";
+    } else {
+      display.value = display.value.slice(0, -1);
+    }
+  }
+
+  function calculate() {
+    try {
+      let expression = display.value;
+
+      if (!/^[0-9+\-*/%.() ]+$/.test(expression)) {
+        display.value = "Error";
+        return;
+      }
+
+      let result = Function(
+        '"use strict"; return (' + expression + ')'
+      )();
+
+      if (!Number.isFinite(result)) {
+        display.value = "Error";
+        return;
+      }
+
+      display.value = result;
+    } catch {
+      display.value = "Error";
+    }
+  }
+</script>
+
+</body>
+</html>
