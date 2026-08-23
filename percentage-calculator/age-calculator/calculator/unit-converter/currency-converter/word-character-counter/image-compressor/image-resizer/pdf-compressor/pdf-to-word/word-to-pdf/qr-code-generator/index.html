@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Free QR Code Generator. Create and download QR codes for URLs, text, phone numbers and more.">
+  <meta name="robots" content="index, follow">
+
+  <title>QR Code Generator - Toolora</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f8fb;
+      color: #172033;
+      line-height: 1.6;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav {
+      max-width: 900px;
+      margin: auto;
+      padding: 16px 20px;
+    }
+
+    .logo {
+      color: #2563eb;
+      font-size: 25px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #64748b;
+    }
+
+    .tool-box,
+    .content {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 25px;
+    }
+
+    .tool-box {
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 130px;
+      padding: 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 16px;
+      resize: vertical;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: #2563eb;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 18px;
+    }
+
+    select,
+    input[type="color"] {
+      width: 100%;
+      height: 45px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      background: white;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      display: none;
+      margin-top: 25px;
+      padding: 20px;
+      background: #eff6ff;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    #qrcode {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 15px auto;
+      min-height: 100px;
+    }
+
+    #qrcode img,
+    #qrcode canvas {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .download {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 13px 20px;
+      border-radius: 10px;
+      background: #16a34a;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .download:hover {
+      background: #15803d;
+    }
+
+    .error {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #fee2e2;
+      color: #b91c1c;
+      text-align: center;
+    }
+
+    .content {
+      margin-top: 25px;
+    }
+
+    .content h2 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .content h2:first-child {
+      margin-top: 0;
+    }
+
+    .content p {
+      color: #475569;
+      margin-bottom: 12px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 25px;
+      text-align: center;
+      background: white;
+      color: #64748b;
+      border-top: 1px solid #e5e7eb;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .tool-box,
+      .content {
+        padding: 20px;
+      }
+
+      .options {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="/">Toolora</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <a class="back" href="/">← Back to Toolora</a>
+
+  <section class="hero">
+    <h1>QR Code Generator</h1>
+    <p>Create and download QR codes instantly.</p>
+  </section>
+
+  <section class="tool-box">
+
+    <label for="qrText">
+      Enter text or URL
+    </label>
+
+    <textarea
+      id="qrText"
+      placeholder="https://example.com"
+    ></textarea>
+
+    <div class="options">
+
+      <div>
+        <label for="size">
+          QR Code Size
+        </label>
+
+        <select id="size">
+          <option value="200">200 × 200</option>
+          <option value="300" selected>300 × 300</option>
+          <option value="400">400 × 400</option>
+          <option value="500">500 × 500</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="color">
+          QR Code Color
+        </label>
+
+        <input
+          type="color"
+          id="color"
+          value="#000000"
+        >
+      </div>
+
+    </div>
+
+    <button onclick="generateQR()">
+      Generate QR Code
+    </button>
+
+    <div class="error" id="error"></div>
+
+    <div class="result" id="result">
+
+      <h2>Your QR Code</h2>
+
+      <div id="qrcode"></div>
+
+      <a
+        id="download"
+        class="download"
+        download="toolora-qr-code.png"
+      >
+        Download QR Code
+      </a>
+
+    </div>
+
+  </section>
+
+  <section class="content">
+
+    <h2>What is a QR Code?</h2>
+
+    <p>
+      A QR code is a scannable code that can store information
+      such as website URLs, text, contact details and other data.
+    </p>
+
+    <h2>How to Create a QR Code</h2>
+
+    <p>
+      Enter your text or URL, choose the size and color, then
+      click Generate QR Code.
+    </p>
+
+    <h2>Privacy</h2>
+
+    <p>
+      The QR code is generated in your browser. Your entered
+      information does not need to be uploaded to a server.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <p>
+      <strong>Can I create a QR code for a website?</strong><br>
+      Yes. Enter the complete website address and generate the QR code.
+    </p>
+
+    <p>
+      <strong>Can I download the QR code?</strong><br>
+      Yes. After generating it, click Download QR Code.
+    </p>
+
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Toolora. Free online tools.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+
+function generateQR() {
+
+  const text =
+    document.getElementById("qrText").value.trim();
+
+  const size =
+    parseInt(
+      document.getElementById("size").value
+    );
+
+  const color =
+    document.getElementById("color").value;
+
+  const error =
+    document.getElementById("error");
+
+  const result =
+    document.getElementById("result");
+
+  const qrContainer =
+    document.getElementById("qrcode");
+
+  error.style.display = "none";
+  result.style.display = "none";
+
+  if (!text) {
+
+    error.textContent =
+      "Please enter some text or a URL.";
+
+    error.style.display = "block";
+
+    return;
+  }
+
+  qrContainer.innerHTML = "";
+
+  new QRCode(qrContainer, {
+    text: text,
+    width: size,
+    height: size,
+    colorDark: color,
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+  });
+
+  result.style.display = "block";
+
+  setTimeout(function() {
+
+    const canvas =
+      qrContainer.querySelector("canvas");
+
+    const image =
+      qrContainer.querySelector("img");
+
+    const download =
+      document.getElementById("download");
+
+    if (canvas) {
+
+      download.href =
+        canvas.toDataURL("image/png");
+
+    } else if (image) {
+
+      download.href =
+        image.src;
+
+    }
+
+  }, 300);
+}
+
+</script>
+
+</body>
+</html>
