@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Create a professional resume with Toolora's free online AI Resume Builder.">
+  <meta name="robots" content="index, follow">
+
+  <title>AI Resume Builder - Toolora</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f8fb;
+      color: #172033;
+      line-height: 1.6;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav {
+      max-width: 1000px;
+      margin: auto;
+      padding: 16px 20px;
+    }
+
+    .logo {
+      color: #2563eb;
+      font-size: 25px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #64748b;
+    }
+
+    .builder {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .box {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+    }
+
+    .box h2 {
+      margin-bottom: 18px;
+      font-size: 21px;
+    }
+
+    .field {
+      margin-bottom: 15px;
+    }
+
+    .field label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      font-size: 15px;
+      font-family: Arial, sans-serif;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #2563eb;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 9px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .resume {
+      min-height: 600px;
+      background: white;
+      border: 1px solid #dbe1ea;
+      padding: 30px;
+    }
+
+    .resume h1 {
+      font-size: 30px;
+      color: #172033;
+    }
+
+    .resume .contact {
+      color: #64748b;
+      margin: 5px 0 20px;
+      font-size: 14px;
+    }
+
+    .resume-section {
+      margin-top: 22px;
+    }
+
+    .resume-section h2 {
+      font-size: 17px;
+      border-bottom: 2px solid #2563eb;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+    }
+
+    .resume-section p {
+      white-space: pre-line;
+      color: #334155;
+      font-size: 14px;
+    }
+
+    .empty {
+      color: #94a3b8;
+      text-align: center;
+      padding: 100px 20px;
+    }
+
+    .content {
+      margin-top: 25px;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 25px;
+    }
+
+    .content h2 {
+      margin-bottom: 10px;
+    }
+
+    .content p {
+      color: #475569;
+      margin-bottom: 15px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 25px;
+      text-align: center;
+      background: white;
+      color: #64748b;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    @media (max-width: 750px) {
+      .builder {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .resume {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="/">Toolora</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <a class="back" href="/">← Back to Toolora</a>
+
+  <section class="hero">
+    <h1>AI Resume Builder</h1>
+    <p>Create a professional resume quickly and easily.</p>
+  </section>
+
+  <div class="builder">
+
+    <section class="box">
+
+      <h2>Resume Information</h2>
+
+      <div class="field">
+        <label for="name">Full Name</label>
+        <input id="name" type="text" placeholder="John Smith">
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="john@example.com">
+      </div>
+
+      <div class="field">
+        <label for="phone">Phone</label>
+        <input id="phone" type="text" placeholder="+1 123 456 7890">
+      </div>
+
+      <div class="field">
+        <label for="location">Location</label>
+        <input id="location" type="text" placeholder="New York, USA">
+      </div>
+
+      <div class="field">
+        <label for="summary">Professional Summary</label>
+        <textarea id="summary" placeholder="Briefly describe your professional background and strengths."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="experience">Work Experience</label>
+        <textarea id="experience" placeholder="Job title - Company&#10;Describe your responsibilities and achievements."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="education">Education</label>
+        <textarea id="education" placeholder="Degree - University&#10;Year"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="skills">Skills</label>
+        <textarea id="skills" placeholder="JavaScript, Communication, Project Management"></textarea>
+      </div>
+
+      <button onclick="buildResume()">
+        Create Resume
+      </button>
+
+      <button onclick="window.print()">
+        Print / Save as PDF
+      </button>
+
+    </section>
+
+    <section class="box">
+
+      <h2>Resume Preview</h2>
+
+      <div id="resume" class="resume">
+
+        <div class="empty">
+          Fill in your information and click
+          <strong>Create Resume</strong>.
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+  <section class="content">
+
+    <h2>AI Resume Builder</h2>
+
+    <p>
+      Create a clean and professional resume using Toolora's
+      online resume builder. Enter your information and instantly
+      generate a structured resume.
+    </p>
+
+    <h2>How to Create a Resume</h2>
+
+    <p>
+      Enter your name, contact information, professional summary,
+      experience, education and skills. Click "Create Resume" to
+      generate your resume preview.
+    </p>
+
+    <h2>Save Your Resume as PDF</h2>
+
+    <p>
+      After creating your resume, use the Print / Save as PDF
+      button to save a PDF copy from your browser.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <p>
+      <strong>Is this resume builder free?</strong><br>
+      Yes. You can create a resume using the tool for free.
+    </p>
+
+    <p>
+      <strong>Is my resume uploaded to a server?</strong><br>
+      No. The information entered on this page is processed
+      directly in your browser.
+    </p>
+
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Toolora. Free online tools.</p>
+</footer>
+
+<script>
+
+function getValue(id) {
+  return document.getElementById(id).value.trim();
+}
+
+function escapeHTML(text) {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function buildResume() {
+
+  const name = getValue("name");
+  const email = getValue("email");
+  const phone = getValue("phone");
+  const location = getValue("location");
+  const summary = getValue("summary");
+  const experience = getValue("experience");
+  const education = getValue("education");
+  const skills = getValue("skills");
+
+  const resume = document.getElementById("resume");
+
+  resume.innerHTML = `
+    <h1>${escapeHTML(name || "Your Name")}</h1>
+
+    <div class="contact">
+      ${escapeHTML(email)}
+      ${email && phone ? " • " : ""}
+      ${escapeHTML(phone)}
+      ${(email || phone) && location ? " • " : ""}
+      ${escapeHTML(location)}
+    </div>
+
+    <div class="resume-section">
+      <h2>PROFESSIONAL SUMMARY</h2>
+      <p>${escapeHTML(summary || "Add your professional summary here.")}</p>
+    </div>
+
+    <div class="resume-section">
+      <h2>WORK EXPERIENCE</h2>
+      <p>${escapeHTML(experience || "Add your work experience here.")}</p>
+    </div>
+
+    <div class="resume-section">
+      <h2>EDUCATION</h2>
+      <p>${escapeHTML(education || "Add your education here.")}</p>
+    </div>
+
+    <div class="resume-section">
+      <h2>SKILLS</h2>
+      <p>${escapeHTML(skills || "Add your skills here.")}</p>
+    </div>
+  `;
+}
+
+</script>
+
+</body>
+</html>
