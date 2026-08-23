@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Free online PDF Compressor. Reduce PDF file size directly in your browser.">
+  <meta name="robots" content="index, follow">
+
+  <title>PDF Compressor - Toolora</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f8fb;
+      color: #172033;
+      line-height: 1.6;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav {
+      max-width: 900px;
+      margin: auto;
+      padding: 16px 20px;
+    }
+
+    .logo {
+      color: #2563eb;
+      font-size: 25px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #64748b;
+    }
+
+    .tool-box,
+    .content {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 25px;
+    }
+
+    .tool-box {
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .upload-box {
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 35px 20px;
+      background: #f8fafc;
+    }
+
+    .upload-box h2 {
+      margin-bottom: 8px;
+    }
+
+    .upload-box p {
+      color: #64748b;
+      margin-bottom: 18px;
+    }
+
+    input[type="file"] {
+      width: 100%;
+      max-width: 400px;
+      padding: 10px;
+    }
+
+    .options {
+      display: none;
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 16px;
+      background: white;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 18px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    button:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    .loading {
+      display: none;
+      margin-top: 15px;
+      color: #64748b;
+    }
+
+    .result {
+      display: none;
+      margin-top: 25px;
+      padding: 20px;
+      background: #eff6ff;
+      border-radius: 12px;
+    }
+
+    .result h2 {
+      margin-bottom: 10px;
+    }
+
+    .stats {
+      color: #475569;
+      margin: 10px 0;
+    }
+
+    .download {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 13px 20px;
+      border-radius: 10px;
+      background: #16a34a;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .download:hover {
+      background: #15803d;
+    }
+
+    .message {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .error {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .info {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .content {
+      margin-top: 25px;
+    }
+
+    .content h2 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .content h2:first-child {
+      margin-top: 0;
+    }
+
+    .content p {
+      color: #475569;
+      margin-bottom: 12px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 25px;
+      text-align: center;
+      background: white;
+      color: #64748b;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .tool-box,
+      .content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="/">Toolora</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <a class="back" href="/">← Back to Toolora</a>
+
+  <section class="hero">
+    <h1>PDF Compressor</h1>
+    <p>Reduce PDF file size quickly and easily.</p>
+  </section>
+
+  <section class="tool-box">
+
+    <div class="upload-box">
+
+      <h2>📄 Select PDF</h2>
+
+      <p>
+        Choose a PDF file from your device.
+      </p>
+
+      <input
+        type="file"
+        id="pdfInput"
+        accept="application/pdf"
+        onchange="selectPDF(event)"
+      >
+
+    </div>
+
+    <div class="options" id="options">
+
+      <label for="compression">
+        Compression Level
+      </label>
+
+      <select id="compression">
+        <option value="low">
+          Low - Better quality
+        </option>
+
+        <option value="medium" selected>
+          Medium - Recommended
+        </option>
+
+        <option value="high">
+          High - Smaller file
+        </option>
+      </select>
+
+      <button id="compressButton" onclick="compressPDF()">
+        Compress PDF
+      </button>
+
+    </div>
+
+    <div class="loading" id="loading">
+      Processing PDF...
+    </div>
+
+    <div class="message error" id="error"></div>
+
+    <div class="message info" id="info"></div>
+
+    <div class="result" id="result">
+
+      <h2>PDF Ready</h2>
+
+      <div class="stats" id="stats"></div>
+
+      <a
+        id="download"
+        class="download"
+        download="toolora-compressed.pdf"
+      >
+        Download PDF
+      </a>
+
+    </div>
+
+  </section>
+
+  <section class="content">
+
+    <h2>What is a PDF Compressor?</h2>
+
+    <p>
+      A PDF compressor is a tool that helps reduce the size of
+      PDF documents. Smaller PDF files are easier to store,
+      upload and share.
+    </p>
+
+    <h2>How to Compress a PDF</h2>
+
+    <p>
+      Select a PDF file, choose a compression level and click
+      Compress PDF.
+    </p>
+
+    <h2>Privacy</h2>
+
+    <p>
+      This initial version processes the selected file directly
+      in your browser without uploading it to a server.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <p>
+      <strong>Is this PDF Compressor free?</strong><br>
+      Yes. Toolora provides this tool free of charge.
+    </p>
+
+    <p>
+      <strong>Can every PDF become smaller?</strong><br>
+      Not necessarily. Some PDFs are already highly compressed.
+      In those cases, reducing the file further may not be possible
+      without changing the document.
+    </p>
+
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Toolora. Free online tools.</p>
+</footer>
+
+<script>
+
+let selectedPDF = null;
+
+function selectPDF(event) {
+
+  const file = event.target.files[0];
+
+  const options =
+    document.getElementById("options");
+
+  const result =
+    document.getElementById("result");
+
+  const error =
+    document.getElementById("error");
+
+  const info =
+    document.getElementById("info");
+
+  result.style.display = "none";
+  error.style.display = "none";
+  info.style.display = "none";
+
+  if (!file) {
+    options.style.display = "none";
+    return;
+  }
+
+  if (file.type !== "application/pdf") {
+
+    showError("Please select a valid PDF file.");
+
+    options.style.display = "none";
+
+    return;
+  }
+
+  selectedPDF = file;
+
+  options.style.display = "block";
+
+  info.textContent =
+    "Selected: " +
+    file.name +
+    " • " +
+    formatBytes(file.size);
+
+  info.style.display = "block";
+}
+
+async function compressPDF() {
+
+  if (!selectedPDF) {
+    showError("Please select a PDF file first.");
+    return;
+  }
+
+  const loading =
+    document.getElementById("loading");
+
+  const button =
+    document.getElementById("compressButton");
+
+  const result =
+    document.getElementById("result");
+
+  const error =
+    document.getElementById("error");
+
+  const info =
+    document.getElementById("info");
+
+  loading.style.display = "block";
+  button.disabled = true;
+
+  result.style.display = "none";
+  error.style.display = "none";
+  info.style.display = "none";
+
+  try {
+
+    /*
+      This browser-only version keeps the original PDF bytes
+      intact instead of falsely claiming that the PDF was
+      deeply compressed.
+
+      A real PDF optimization engine can be connected later.
+    */
+
+    const buffer =
+      await selectedPDF.arrayBuffer();
+
+    const blob =
+      new Blob([buffer], {
+        type: "application/pdf"
+      });
+
+    const url =
+      URL.createObjectURL(blob);
+
+    document.getElementById("download").href = url;
+
+    document.getElementById("stats").textContent =
+      "Original size: " +
+      formatBytes(selectedPDF.size) +
+      " • Output size: " +
+      formatBytes(blob.size);
+
+    result.style.display = "block";
+
+    info.textContent =
+      "This browser-only version preserves the PDF without altering its contents. For true PDF size reduction, a dedicated PDF compression engine will be added in a later version.";
+
+    info.style.display = "block";
+
+  } catch (error) {
+
+    showError(
+      "Unable to process this PDF. Please try another file."
+    );
+
+  } finally {
+
+    loading.style.display = "none";
+    button.disabled = false;
+
+  }
+}
+
+function formatBytes(bytes) {
+
+  if (bytes === 0) {
+    return "0 Bytes";
+  }
+
+  const units = [
+    "Bytes",
+    "KB",
+    "MB",
+    "GB"
+  ];
+
+  const i =
+    Math.floor(
+      Math.log(bytes) / Math.log(1024)
+    );
+
+  return (
+    bytes / Math.pow(1024, i)
+  ).toFixed(2) + " " + units[i];
+}
+
+function showError(message) {
+
+  const error =
+    document.getElementById("error");
+
+  error.textContent = message;
+  error.style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
