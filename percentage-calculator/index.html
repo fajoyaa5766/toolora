@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Free Percentage Calculator - Calculate percentages quickly and easily.">
+  <meta name="robots" content="index, follow">
+
+  <title>Percentage Calculator - Toolora</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f8fb;
+      color: #172033;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav {
+      max-width: 900px;
+      margin: auto;
+      padding: 16px 20px;
+    }
+
+    .logo {
+      text-decoration: none;
+      font-size: 25px;
+      font-weight: 800;
+      color: #2563eb;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #2563eb;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #64748b;
+    }
+
+    .calculator {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #2563eb;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      display: none;
+      margin-top: 20px;
+      padding: 18px;
+      background: #eff6ff;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .result strong {
+      font-size: 25px;
+      color: #2563eb;
+    }
+
+    .content {
+      background: white;
+      margin-top: 25px;
+      padding: 25px;
+      border-radius: 16px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .content h2 {
+      margin-bottom: 10px;
+      margin-top: 20px;
+    }
+
+    .content h2:first-child {
+      margin-top: 0;
+    }
+
+    .content p {
+      color: #475569;
+      margin-bottom: 12px;
+    }
+
+    .example {
+      background: #f8fafc;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 25px;
+      text-align: center;
+      background: white;
+      border-top: 1px solid #e5e7eb;
+      color: #64748b;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .calculator,
+      .content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="/">Toolora</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <a class="back" href="/">← Back to Toolora</a>
+
+  <section class="hero">
+    <h1>Percentage Calculator</h1>
+    <p>Calculate percentages quickly and easily.</p>
+  </section>
+
+  <section class="calculator">
+
+    <div class="input-group">
+      <label for="percent">Percentage (%)</label>
+      <input
+        type="number"
+        id="percent"
+        placeholder="Example: 20"
+        step="any"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="number">Number</label>
+      <input
+        type="number"
+        id="number"
+        placeholder="Example: 150"
+        step="any"
+      >
+    </div>
+
+    <button onclick="calculatePercentage()">
+      Calculate Percentage
+    </button>
+
+    <div class="result" id="result">
+      Result:
+      <br>
+      <strong id="answer"></strong>
+    </div>
+
+  </section>
+
+  <section class="content">
+
+    <h2>What is a Percentage Calculator?</h2>
+
+    <p>
+      A percentage calculator is a simple online tool that helps you
+      calculate a percentage of a number quickly.
+    </p>
+
+    <h2>How to Calculate a Percentage</h2>
+
+    <p>
+      To calculate a percentage of a number, multiply the percentage
+      by the number and divide the result by 100.
+    </p>
+
+    <div class="example">
+      <strong>Example:</strong><br>
+      20% of 150 = (20 × 150) ÷ 100 = 30
+    </div>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <p>
+      <strong>What is 20% of 150?</strong><br>
+      20% of 150 is 30.
+    </p>
+
+    <p>
+      <strong>Can I use decimal numbers?</strong><br>
+      Yes. The calculator supports decimal numbers.
+    </p>
+
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Toolora. Free online tools.</p>
+</footer>
+
+<script>
+function calculatePercentage() {
+
+  const percentage = parseFloat(
+    document.getElementById("percent").value
+  );
+
+  const number = parseFloat(
+    document.getElementById("number").value
+  );
+
+  const resultBox = document.getElementById("result");
+  const answer = document.getElementById("answer");
+
+  if (isNaN(percentage) || isNaN(number)) {
+    answer.textContent = "Please enter both numbers.";
+    resultBox.style.display = "block";
+    return;
+  }
+
+  const result = (percentage / 100) * number;
+
+  answer.textContent = result;
+  resultBox.style.display = "block";
+}
+</script>
+
+</body>
+</html>
