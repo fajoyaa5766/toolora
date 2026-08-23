@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Free live currency converter. Convert currencies using the latest available exchange rates.">
+  <meta name="robots" content="index, follow">
+
+  <title>Currency Converter - Toolora</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f8fb;
+      color: #172033;
+      line-height: 1.6;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav {
+      max-width: 900px;
+      margin: auto;
+      padding: 16px 20px;
+    }
+
+    .logo {
+      color: #2563eb;
+      font-size: 25px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #64748b;
+    }
+
+    .converter,
+    .content {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 25px;
+    }
+
+    .converter {
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    .group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 16px;
+      background: white;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      background: #eff6ff;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .result strong {
+      display: block;
+      margin-top: 5px;
+      color: #2563eb;
+      font-size: 25px;
+    }
+
+    .rate-info {
+      margin-top: 10px;
+      color: #64748b;
+      font-size: 13px;
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+      margin-top: 15px;
+      color: #64748b;
+    }
+
+    .error {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #fee2e2;
+      color: #b91c1c;
+      text-align: center;
+    }
+
+    .content {
+      margin-top: 25px;
+    }
+
+    .content h2 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .content h2:first-child {
+      margin-top: 0;
+    }
+
+    .content p {
+      color: #475569;
+      margin-bottom: 12px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 25px;
+      text-align: center;
+      background: white;
+      color: #64748b;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .converter,
+      .content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="/">Toolora</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <a class="back" href="/">← Back to Toolora</a>
+
+  <section class="hero">
+    <h1>Currency Converter</h1>
+    <p>Convert currencies using the latest available exchange rates.</p>
+  </section>
+
+  <section class="converter">
+
+    <div class="group">
+      <label for="amount">Amount</label>
+
+      <input
+        type="number"
+        id="amount"
+        value="1"
+        min="0"
+        step="any"
+        placeholder="Enter amount"
+      >
+    </div>
+
+    <div class="group">
+      <label for="fromCurrency">From</label>
+
+      <select id="fromCurrency">
+        <option value="USD">USD - US Dollar</option>
+        <option value="EUR">EUR - Euro</option>
+        <option value="GBP">GBP - British Pound</option>
+        <option value="PKR">PKR - Pakistani Rupee</option>
+        <option value="INR">INR - Indian Rupee</option>
+        <option value="CAD">CAD - Canadian Dollar</option>
+        <option value="AUD">AUD - Australian Dollar</option>
+        <option value="AED">AED - UAE Dirham</option>
+        <option value="SAR">SAR - Saudi Riyal</option>
+        <option value="JPY">JPY - Japanese Yen</option>
+        <option value="CHF">CHF - Swiss Franc</option>
+        <option value="CNY">CNY - Chinese Yuan</option>
+        <option value="HKD">HKD - Hong Kong Dollar</option>
+        <option value="SGD">SGD - Singapore Dollar</option>
+        <option value="NZD">NZD - New Zealand Dollar</option>
+        <option value="ZAR">ZAR - South African Rand</option>
+        <option value="TRY">TRY - Turkish Lira</option>
+        <option value="RUB">RUB - Russian Ruble</option>
+        <option value="BRL">BRL - Brazilian Real</option>
+        <option value="KRW">KRW - South Korean Won</option>
+      </select>
+    </div>
+
+    <div class="group">
+      <label for="toCurrency">To</label>
+
+      <select id="toCurrency">
+        <option value="PKR">PKR - Pakistani Rupee</option>
+        <option value="USD">USD - US Dollar</option>
+        <option value="EUR">EUR - Euro</option>
+        <option value="GBP">GBP - British Pound</option>
+        <option value="INR">INR - Indian Rupee</option>
+        <option value="AED">AED - UAE Dirham</option>
+        <option value="SAR">SAR - Saudi Riyal</option>
+        <option value="JPY">JPY - Japanese Yen</option>
+        <option value="CAD">CAD - Canadian Dollar</option>
+        <option value="AUD">AUD - Australian Dollar</option>
+        <option value="CHF">CHF - Swiss Franc</option>
+        <option value="CNY">CNY - Chinese Yuan</option>
+        <option value="HKD">HKD - Hong Kong Dollar</option>
+        <option value="SGD">SGD - Singapore Dollar</option>
+        <option value="NZD">NZD - New Zealand Dollar</option>
+        <option value="ZAR">ZAR - South African Rand</option>
+        <option value="TRY">TRY - Turkish Lira</option>
+        <option value="RUB">RUB - Russian Ruble</option>
+        <option value="BRL">BRL - Brazilian Real</option>
+        <option value="KRW">KRW - South Korean Won</option>
+      </select>
+    </div>
+
+    <button onclick="convertCurrency()">
+      Convert
+    </button>
+
+    <div class="loading" id="loading">
+      Getting latest exchange rate...
+    </div>
+
+    <div class="error" id="error"></div>
+
+    <div class="result" id="result">
+
+      <div>Converted Amount</div>
+
+      <strong id="answer"></strong>
+
+      <div class="rate-info" id="rateInfo"></div>
+
+    </div>
+
+  </section>
+
+  <section class="content">
+
+    <h2>What is a Currency Converter?</h2>
+
+    <p>
+      A currency converter helps you calculate the value of one
+      currency in another currency using exchange rates.
+    </p>
+
+    <h2>How to Use This Currency Converter</h2>
+
+    <p>
+      Enter an amount, choose the currency you have, choose the
+      currency you want, and press Convert.
+    </p>
+
+    <h2>Live Exchange Rates</h2>
+
+    <p>
+      This converter requests the latest available exchange rate
+      from an online exchange-rate service when you perform a
+      conversion.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <p>
+      <strong>Are the rates live?</strong><br>
+      The tool requests the latest available rate from the API.
+      Exchange-rate data may be updated daily rather than every second.
+    </p>
+
+    <p>
+      <strong>Do I need an API key?</strong><br>
+      No. This implementation uses a public exchange-rate API
+      that does not require an API key.
+    </p>
+
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Toolora. Free online tools.</p>
+</footer>
+
+<script>
+
+async function convertCurrency() {
+
+  const amount = parseFloat(
+    document.getElementById("amount").value
+  );
+
+  const from = document.getElementById("fromCurrency").value;
+  const to = document.getElementById("toCurrency").value;
+
+  const resultBox = document.getElementById("result");
+  const answer = document.getElementById("answer");
+  const rateInfo = document.getElementById("rateInfo");
+  const loading = document.getElementById("loading");
+  const errorBox = document.getElementById("error");
+
+  resultBox.style.display = "none";
+  errorBox.style.display = "none";
+
+  if (isNaN(amount) || amount < 0) {
+
+    errorBox.textContent = "Please enter a valid amount.";
+    errorBox.style.display = "block";
+
+    return;
+  }
+
+  if (from === to) {
+
+    answer.textContent =
+      amount.toLocaleString(undefined, {
+        maximumFractionDigits: 4
+      }) + " " + to;
+
+    rateInfo.textContent =
+      "1 " + from + " = 1 " + to;
+
+    resultBox.style.display = "block";
+
+    return;
+  }
+
+  loading.style.display = "block";
+
+  try {
+
+    const url =
+      "https://api.frankfurter.dev/v2/rate/" +
+      encodeURIComponent(from) +
+      "/" +
+      encodeURIComponent(to);
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error("Exchange rate unavailable");
+    }
+
+    const data = await response.json();
+
+    const rate = Number(data.rate);
+    const converted = amount * rate;
+
+    answer.textContent =
+      converted.toLocaleString(undefined, {
+        maximumFractionDigits: 4
+      }) + " " + to;
+
+    rateInfo.textContent =
+      "1 " + from + " = " +
+      rate.toLocaleString(undefined, {
+        maximumFractionDigits: 6
+      }) + " " + to +
+      " • Rate date: " + data.date;
+
+    resultBox.style.display = "block";
+
+  } catch (error) {
+
+    errorBox.textContent =
+      "Unable to get the latest exchange rate. Please try again.";
+
+    errorBox.style.display = "block";
+
+  } finally {
+
+    loading.style.display = "none";
+
+  }
+}
+
+</script>
+
+</body>
+</html>
