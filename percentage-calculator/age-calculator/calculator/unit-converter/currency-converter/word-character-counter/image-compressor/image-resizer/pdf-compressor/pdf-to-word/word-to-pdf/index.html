@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Free online Word to PDF converter. Create and download PDF documents easily with Toolora.">
+  <meta name="robots" content="index, follow">
+
+  <title>Word to PDF Converter - Toolora</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f8fb;
+      color: #172033;
+      line-height: 1.6;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav {
+      max-width: 900px;
+      margin: auto;
+      padding: 16px 20px;
+    }
+
+    .logo {
+      color: #2563eb;
+      font-size: 25px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #64748b;
+    }
+
+    .tool-box,
+    .content {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 25px;
+    }
+
+    .tool-box {
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    .editor {
+      width: 100%;
+      min-height: 350px;
+      padding: 18px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      background: white;
+      font-size: 16px;
+      line-height: 1.7;
+      outline: none;
+    }
+
+    .editor:focus {
+      border-color: #2563eb;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .toolbar button {
+      width: auto;
+      margin: 0;
+      padding: 9px 13px;
+      background: #f1f5f9;
+      color: #172033;
+      border: 1px solid #dbe1ea;
+      font-size: 14px;
+    }
+
+    .toolbar button:hover {
+      background: #e2e8f0;
+    }
+
+    .filename {
+      margin-top: 18px;
+    }
+
+    .filename label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    .filename input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    .convert {
+      width: 100%;
+      padding: 15px;
+      margin-top: 18px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .convert:hover {
+      background: #1d4ed8;
+    }
+
+    .info {
+      margin-top: 15px;
+      padding: 12px;
+      background: #eff6ff;
+      border-radius: 8px;
+      color: #1e40af;
+      text-align: center;
+      display: none;
+    }
+
+    .content {
+      margin-top: 25px;
+    }
+
+    .content h2 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .content h2:first-child {
+      margin-top: 0;
+    }
+
+    .content p {
+      color: #475569;
+      margin-bottom: 12px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 25px;
+      text-align: center;
+      background: white;
+      color: #64748b;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .tool-box,
+      .content {
+        padding: 20px;
+      }
+
+      .toolbar {
+        gap: 5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="/">Toolora</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <a class="back" href="/">← Back to Toolora</a>
+
+  <section class="hero">
+    <h1>Word to PDF</h1>
+    <p>Create a PDF document from your text and download it instantly.</p>
+  </section>
+
+  <section class="tool-box">
+
+    <div class="toolbar">
+
+      <button onclick="formatText('bold')">
+        <strong>B</strong>
+      </button>
+
+      <button onclick="formatText('italic')">
+        <em>I</em>
+      </button>
+
+      <button onclick="formatText('underline')">
+        <u>U</u>
+      </button>
+
+      <button onclick="formatText('justifyLeft')">
+        Left
+      </button>
+
+      <button onclick="formatText('justifyCenter')">
+        Center
+      </button>
+
+      <button onclick="formatText('justifyRight')">
+        Right
+      </button>
+
+    </div>
+
+    <div
+      id="editor"
+      class="editor"
+      contenteditable="true"
+    >
+      <p>Write your document here...</p>
+    </div>
+
+    <div class="filename">
+
+      <label for="fileName">
+        PDF File Name
+      </label>
+
+      <input
+        type="text"
+        id="fileName"
+        value="toolora-document"
+        placeholder="Enter file name"
+      >
+
+    </div>
+
+    <button
+      class="convert"
+      onclick="createPDF()"
+    >
+      Download as PDF
+    </button>
+
+    <div
+      class="info"
+      id="info"
+    >
+      Your PDF is being created...
+    </div>
+
+  </section>
+
+  <section class="content">
+
+    <h2>What is Word to PDF?</h2>
+
+    <p>
+      Word to PDF is a document creation tool that lets you
+      write and format text and save it as a PDF file.
+    </p>
+
+    <h2>How to Create a PDF</h2>
+
+    <p>
+      Enter your text in the editor, use the formatting buttons
+      if needed, enter a file name and click Download as PDF.
+    </p>
+
+    <h2>Privacy</h2>
+
+    <p>
+      Your document is processed directly in your browser.
+      The text does not need to be uploaded to a server.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <p>
+      <strong>Is this tool free?</strong><br>
+      Yes. Toolora's Word to PDF tool is free to use.
+    </p>
+
+    <p>
+      <strong>Can I format my text?</strong><br>
+      Yes. You can use bold, italic, underline and alignment
+      options before creating your PDF.
+    </p>
+
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Toolora. Free online tools.</p>
+</footer>
+
+<script>
+
+function formatText(command) {
+
+  document.execCommand(command, false, null);
+
+  document.getElementById("editor").focus();
+}
+
+function createPDF() {
+
+  const editor =
+    document.getElementById("editor");
+
+  const fileNameInput =
+    document.getElementById("fileName");
+
+  const info =
+    document.getElementById("info");
+
+  const content =
+    editor.innerHTML;
+
+  let fileName =
+    fileNameInput.value.trim();
+
+  if (!fileName) {
+    fileName = "toolora-document";
+  }
+
+  fileName =
+    fileName.replace(/[^a-zA-Z0-9-_]/g, "-");
+
+  info.textContent =
+    "Preparing your PDF...";
+
+  info.style.display =
+    "block";
+
+  const printWindow =
+    window.open("", "_blank");
+
+  if (!printWindow) {
+
+    info.textContent =
+      "Please allow pop-ups in your browser and try again.";
+
+    return;
+  }
+
+  printWindow.document.open();
+
+  printWindow.document.write(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+
+      <meta charset="UTF-8">
+
+      <title>${escapeHTML(fileName)}</title>
+
+      <style>
+
+        @page {
+          size: A4;
+          margin: 20mm;
+        }
+
+        body {
+          font-family: Arial, sans-serif;
+          font-size: 16px;
+          line-height: 1.7;
+          color: #111827;
+          word-wrap: break-word;
+        }
+
+        h1, h2, h3 {
+          margin-top: 15px;
+          margin-bottom: 10px;
+        }
+
+        p {
+          margin-bottom: 12px;
+        }
+
+      </style>
+
+    </head>
+
+    <body>
+
+      ${content}
+
+    </body>
+    </html>
+  `);
+
+  printWindow.document.close();
+
+  setTimeout(function() {
+
+    printWindow.focus();
+
+    printWindow.print();
+
+    info.textContent =
+      "PDF print window opened. Choose 'Save as PDF' to save your document.";
+
+  }, 700);
+}
+
+function escapeHTML(text) {
+
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+</script>
+
+</body>
+  </html>
