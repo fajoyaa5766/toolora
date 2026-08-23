@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Free online Image Compressor. Compress JPG, PNG and WebP images directly in your browser.">
+  <meta name="robots" content="index, follow">
+
+  <title>Image Compressor - Toolora</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f8fb;
+      color: #172033;
+      line-height: 1.6;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav {
+      max-width: 900px;
+      margin: auto;
+      padding: 16px 20px;
+    }
+
+    .logo {
+      color: #2563eb;
+      font-size: 25px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #64748b;
+    }
+
+    .compressor,
+    .content {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 25px;
+    }
+
+    .compressor {
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    .upload-box {
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 35px 20px;
+      text-align: center;
+      background: #f8fafc;
+    }
+
+    .upload-box p {
+      color: #64748b;
+      margin-bottom: 15px;
+    }
+
+    input[type="file"] {
+      width: 100%;
+      max-width: 400px;
+      padding: 10px;
+    }
+
+    .controls {
+      margin-top: 20px;
+      display: none;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+    }
+
+    .quality-value {
+      text-align: center;
+      margin-top: 5px;
+      color: #2563eb;
+      font-weight: bold;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 18px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      display: none;
+      margin-top: 25px;
+      padding: 20px;
+      background: #eff6ff;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .preview {
+      max-width: 100%;
+      max-height: 300px;
+      margin: 15px auto;
+      border-radius: 8px;
+      display: block;
+    }
+
+    .stats {
+      color: #475569;
+      margin: 10px 0;
+    }
+
+    .download {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 13px 20px;
+      border-radius: 10px;
+      background: #16a34a;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .download:hover {
+      background: #15803d;
+    }
+
+    .error {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #fee2e2;
+      color: #b91c1c;
+      text-align: center;
+    }
+
+    .content {
+      margin-top: 25px;
+    }
+
+    .content h2 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .content h2:first-child {
+      margin-top: 0;
+    }
+
+    .content p {
+      color: #475569;
+      margin-bottom: 12px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 25px;
+      text-align: center;
+      background: white;
+      color: #64748b;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .compressor,
+      .content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="/">Toolora</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <a class="back" href="/">← Back to Toolora</a>
+
+  <section class="hero">
+    <h1>Image Compressor</h1>
+    <p>Reduce image file size directly in your browser.</p>
+  </section>
+
+  <section class="compressor">
+
+    <div class="upload-box">
+
+      <p>
+        Select a JPG, PNG or WebP image to compress.
+      </p>
+
+      <input
+        type="file"
+        id="imageInput"
+        accept="image/jpeg,image/png,image/webp"
+        onchange="loadImage(event)"
+      >
+
+    </div>
+
+    <div class="controls" id="controls">
+
+      <label for="quality">
+        Compression Quality
+      </label>
+
+      <input
+        type="range"
+        id="quality"
+        min="10"
+        max="100"
+        value="75"
+        oninput="updateQuality()"
+      >
+
+      <div class="quality-value" id="qualityValue">
+        75%
+      </div>
+
+      <button onclick="compressImage()">
+        Compress Image
+      </button>
+
+    </div>
+
+    <div class="error" id="error"></div>
+
+    <div class="result" id="result">
+
+      <h2>Compressed Image</h2>
+
+      <img
+        id="preview"
+        class="preview"
+        alt="Compressed image preview"
+      >
+
+      <div class="stats" id="stats"></div>
+
+      <a
+        id="download"
+        class="download"
+        download="toolora-compressed-image.jpg"
+      >
+        Download Compressed Image
+      </a>
+
+    </div>
+
+  </section>
+
+  <section class="content">
+
+    <h2>What is an Image Compressor?</h2>
+
+    <p>
+      An image compressor reduces the file size of an image while
+      trying to maintain good visual quality. Smaller images can
+      load faster on websites and use less storage.
+    </p>
+
+    <h2>How to Compress an Image</h2>
+
+    <p>
+      Select your image, choose the compression quality and click
+      the Compress Image button. Then download the compressed file.
+    </p>
+
+    <h2>Privacy</h2>
+
+    <p>
+      Your selected image is processed directly in your browser.
+      The tool does not need to upload your image to a server.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <p>
+      <strong>Which formats are supported?</strong><br>
+      JPG, PNG and WebP images are supported.
+    </p>
+
+    <p>
+      <strong>Is the Image Compressor free?</strong><br>
+      Yes. Toolora's Image Compressor is free to use.
+    </p>
+
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Toolora. Free online tools.</p>
+</footer>
+
+<script>
+
+let selectedImage = null;
+
+function loadImage(event) {
+
+  const file = event.target.files[0];
+
+  const error = document.getElementById("error");
+  const controls = document.getElementById("controls");
+  const result = document.getElementById("result");
+
+  error.style.display = "none";
+  result.style.display = "none";
+
+  if (!file) {
+    controls.style.display = "none";
+    return;
+  }
+
+  if (!file.type.startsWith("image/")) {
+
+    error.textContent = "Please select a valid image file.";
+    error.style.display = "block";
+    controls.style.display = "none";
+
+    return;
+  }
+
+  selectedImage = file;
+
+  controls.style.display = "block";
+}
+
+function updateQuality() {
+
+  const quality = document.getElementById("quality").value;
+
+  document.getElementById("qualityValue").textContent =
+    quality + "%";
+}
+
+function compressImage() {
+
+  if (!selectedImage) {
+    return;
+  }
+
+  const qualityValue =
+    parseInt(document.getElementById("quality").value, 10);
+
+  const quality = qualityValue / 100;
+
+  const img = new Image();
+
+  const objectUrl = URL.createObjectURL(selectedImage);
+
+  img.onload = function() {
+
+    const canvas = document.createElement("canvas");
+
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    const ctx = canvas.getContext("2d");
+
+    ctx.drawImage(
+      img,
+      0,
+      0,
+      img.width,
+      img.height
+    );
+
+    canvas.toBlob(
+      function(blob) {
+
+        if (!blob) {
+          showError("Unable to compress this image.");
+          URL.revokeObjectURL(objectUrl);
+          return;
+        }
+
+        const compressedUrl =
+          URL.createObjectURL(blob);
+
+        document.getElementById("preview").src =
+          compressedUrl;
+
+        const originalKB =
+          selectedImage.size / 1024;
+
+        const compressedKB =
+          blob.size / 1024;
+
+        const saved =
+          ((selectedImage.size - blob.size) /
+          selectedImage.size) * 100;
+
+        document.getElementById("stats").textContent =
+          "Original: " +
+          originalKB.toFixed(1) +
+          " KB | Compressed: " +
+          compressedKB.toFixed(1) +
+          " KB | Size change: " +
+          saved.toFixed(1) +
+          "%";
+
+        const download =
+          document.getElementById("download");
+
+        download.href = compressedUrl;
+
+        document.getElementById("result").style.display =
+          "block";
+
+        URL.revokeObjectURL(objectUrl);
+
+      },
+      "image/jpeg",
+      quality
+    );
+  };
+
+  img.onerror = function() {
+
+    showError("Unable to read this image.");
+
+    URL.revokeObjectURL(objectUrl);
+  };
+
+  img.src = objectUrl;
+}
+
+function showError(message) {
+
+  const error =
+    document.getElementById("error");
+
+  error.textContent = message;
+  error.style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
