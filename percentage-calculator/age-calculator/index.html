@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Free Age Calculator - Calculate your exact age in years, months and days.">
+  <meta name="robots" content="index, follow">
+
+  <title>Age Calculator - Toolora</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f8fb;
+      color: #172033;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav {
+      max-width: 900px;
+      margin: auto;
+      padding: 16px 20px;
+    }
+
+    .logo {
+      text-decoration: none;
+      font-size: 25px;
+      font-weight: 800;
+      color: #2563eb;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #64748b;
+    }
+
+    .calculator,
+    .content {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 25px;
+    }
+
+    .calculator {
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      background: #eff6ff;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .result h2 {
+      color: #2563eb;
+      margin-bottom: 10px;
+    }
+
+    .age-number {
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .content {
+      margin-top: 25px;
+    }
+
+    .content h2 {
+      margin: 20px 0 10px;
+    }
+
+    .content h2:first-child {
+      margin-top: 0;
+    }
+
+    .content p {
+      color: #475569;
+      margin-bottom: 12px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 25px;
+      text-align: center;
+      background: white;
+      border-top: 1px solid #e5e7eb;
+      color: #64748b;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .calculator,
+      .content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="/">Toolora</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <a class="back" href="/">← Back to Toolora</a>
+
+  <section class="hero">
+    <h1>Age Calculator</h1>
+    <p>Calculate your exact age in years, months and days.</p>
+  </section>
+
+  <section class="calculator">
+
+    <label for="birthDate">Date of Birth</label>
+
+    <input
+      type="date"
+      id="birthDate"
+    >
+
+    <button onclick="calculateAge()">
+      Calculate Age
+    </button>
+
+    <div class="result" id="result">
+      <h2>Your Age</h2>
+
+      <div class="age-number" id="ageResult"></div>
+    </div>
+
+  </section>
+
+  <section class="content">
+
+    <h2>What is an Age Calculator?</h2>
+
+    <p>
+      An age calculator is an online tool that calculates your age
+      from your date of birth to today's date.
+    </p>
+
+    <h2>How to Use the Age Calculator</h2>
+
+    <p>
+      Select your date of birth and click the Calculate Age button.
+      The calculator will show your age in years, months and days.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <p>
+      <strong>Can I calculate my exact age?</strong><br>
+      Yes. The calculator calculates your age using your birth date
+      and the current date.
+    </p>
+
+    <p>
+      <strong>Is this Age Calculator free?</strong><br>
+      Yes. Toolora's Age Calculator is free to use.
+    </p>
+
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Toolora. Free online tools.</p>
+</footer>
+
+<script>
+function calculateAge() {
+
+  const birthInput = document.getElementById("birthDate").value;
+  const resultBox = document.getElementById("result");
+  const ageResult = document.getElementById("ageResult");
+
+  if (!birthInput) {
+    ageResult.textContent = "Please select your date of birth.";
+    resultBox.style.display = "block";
+    return;
+  }
+
+  const birthDate = new Date(birthInput + "T00:00:00");
+  const today = new Date();
+
+  if (birthDate > today) {
+    ageResult.textContent = "Date of birth cannot be in the future.";
+    resultBox.style.display = "block";
+    return;
+  }
+
+  let years = today.getFullYear() - birthDate.getFullYear();
+  let months = today.getMonth() - birthDate.getMonth();
+  let days = today.getDate() - birthDate.getDate();
+
+  if (days < 0) {
+    months--;
+
+    const previousMonth = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      0
+    );
+
+    days += previousMonth.getDate();
+  }
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  ageResult.textContent =
+    years + " years, " +
+    months + " months, " +
+    days + " days";
+
+  resultBox.style.display = "block";
+}
+</script>
+
+</body>
+</html>
