@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Free PDF to Word converter. Extract text from PDF files and download it as a Word document.">
+  <meta name="robots" content="index, follow">
+
+  <title>PDF to Word Converter - Toolora</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f8fb;
+      color: #172033;
+      line-height: 1.6;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav {
+      max-width: 900px;
+      margin: auto;
+      padding: 16px 20px;
+    }
+
+    .logo {
+      color: #2563eb;
+      font-size: 25px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #64748b;
+    }
+
+    .tool-box,
+    .content {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 25px;
+    }
+
+    .tool-box {
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    .upload-box {
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 35px 20px;
+      text-align: center;
+      background: #f8fafc;
+    }
+
+    .upload-box h2 {
+      margin-bottom: 8px;
+    }
+
+    .upload-box p {
+      color: #64748b;
+      margin-bottom: 18px;
+    }
+
+    input[type="file"] {
+      width: 100%;
+      max-width: 400px;
+      padding: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    button:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+      margin-top: 18px;
+      color: #64748b;
+    }
+
+    .result {
+      display: none;
+      margin-top: 25px;
+      padding: 20px;
+      background: #eff6ff;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .result h2 {
+      margin-bottom: 8px;
+    }
+
+    .result p {
+      color: #475569;
+      margin-bottom: 15px;
+    }
+
+    .download {
+      display: inline-block;
+      padding: 13px 20px;
+      border-radius: 10px;
+      background: #16a34a;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .download:hover {
+      background: #15803d;
+    }
+
+    .message {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .error {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .info {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .content {
+      margin-top: 25px;
+    }
+
+    .content h2 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .content h2:first-child {
+      margin-top: 0;
+    }
+
+    .content p {
+      color: #475569;
+      margin-bottom: 12px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 25px;
+      text-align: center;
+      background: white;
+      color: #64748b;
+      border-top: 1px solid #e5e7eb;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .tool-box,
+      .content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="/">Toolora</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <a class="back" href="/">← Back to Toolora</a>
+
+  <section class="hero">
+    <h1>PDF to Word</h1>
+    <p>Convert text-based PDF files into editable Word documents.</p>
+  </section>
+
+  <section class="tool-box">
+
+    <div class="upload-box">
+
+      <h2>📄 Select PDF</h2>
+
+      <p>
+        Choose a PDF file from your device.
+      </p>
+
+      <input
+        type="file"
+        id="pdfInput"
+        accept="application/pdf"
+        onchange="selectPDF(event)"
+      >
+
+    </div>
+
+    <button
+      id="convertButton"
+      onclick="convertPDF()"
+      disabled
+    >
+      Convert to Word
+    </button>
+
+    <div class="loading" id="loading">
+      Extracting PDF text...
+    </div>
+
+    <div class="message error" id="error"></div>
+
+    <div class="message info" id="info"></div>
+
+    <div class="result" id="result">
+
+      <h2>Conversion Complete</h2>
+
+      <p id="resultText"></p>
+
+      <a
+        id="download"
+        class="download"
+        download="toolora-pdf-to-word.doc"
+      >
+        Download Word Document
+      </a>
+
+    </div>
+
+  </section>
+
+  <section class="content">
+
+    <h2>What is PDF to Word?</h2>
+
+    <p>
+      PDF to Word conversion changes text from a PDF document
+      into an editable Word document.
+    </p>
+
+    <h2>How to Convert PDF to Word</h2>
+
+    <p>
+      Select a PDF file and click Convert to Word. The extracted
+      text will be placed into a Word-compatible document.
+    </p>
+
+    <h2>Important Information</h2>
+
+    <p>
+      This version works best with PDFs containing selectable text.
+      Scanned PDFs and complex layouts may require OCR and advanced
+      document processing.
+    </p>
+
+    <h2>Privacy</h2>
+
+    <p>
+      The conversion is performed in your browser. Your PDF does
+      not need to be uploaded to a server.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <p>
+      <strong>Can I convert scanned PDFs?</strong><br>
+      Scanned PDFs usually require OCR. This initial version
+      focuses on text-based PDFs.
+    </p>
+
+    <p>
+      <strong>Is this tool free?</strong><br>
+      Yes. Toolora's PDF to Word tool is free to use.
+    </p>
+
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Toolora. Free online tools.</p>
+</footer>
+
+<!-- PDF.js library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs"
+        type="module"></script>
+
+<script type="module">
+
+  import * as pdfjsLib
+    from "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs";
+
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs";
+
+  let selectedPDF = null;
+
+  window.selectPDF = function(event) {
+
+    const file = event.target.files[0];
+
+    const button =
+      document.getElementById("convertButton");
+
+    const result =
+      document.getElementById("result");
+
+    const error =
+      document.getElementById("error");
+
+    const info =
+      document.getElementById("info");
+
+    result.style.display = "none";
+    error.style.display = "none";
+    info.style.display = "none";
+
+    if (!file) {
+      selectedPDF = null;
+      button.disabled = true;
+      return;
+    }
+
+    if (file.type !== "application/pdf") {
+
+      showError("Please select a valid PDF file.");
+
+      selectedPDF = null;
+      button.disabled = true;
+
+      return;
+    }
+
+    selectedPDF = file;
+    button.disabled = false;
+
+    info.textContent =
+      "Selected: " +
+      file.name +
+      " • " +
+      formatBytes(file.size);
+
+    info.style.display = "block";
+  };
+
+  window.convertPDF = async function() {
+
+    if (!selectedPDF) {
+      showError("Please select a PDF file first.");
+      return;
+    }
+
+    const button =
+      document.getElementById("convertButton");
+
+    const loading =
+      document.getElementById("loading");
+
+    const result =
+      document.getElementById("result");
+
+    const error =
+      document.getElementById("error");
+
+    const info =
+      document.getElementById("info");
+
+    button.disabled = true;
+    loading.style.display = "block";
+    result.style.display = "none";
+    error.style.display = "none";
+    info.style.display = "none";
+
+    try {
+
+      const arrayBuffer =
+        await selectedPDF.arrayBuffer();
+
+      const pdf =
+        await pdfjsLib.getDocument({
+          data: arrayBuffer
+        }).promise;
+
+      let fullText = "";
+
+      for (
+        let pageNumber = 1;
+        pageNumber <= pdf.numPages;
+        pageNumber++
+      ) {
+
+        const page =
+          await pdf.getPage(pageNumber);
+
+        const textContent =
+          await page.getTextContent();
+
+        const pageText =
+          textContent.items
+            .map(item => item.str)
+            .join(" ");
+
+        fullText +=
+          pageText +
+          "\n\n";
+      }
+
+      fullText =
+        fullText.trim();
+
+      if (!fullText) {
+
+        showError(
+          "No selectable text was found. This may be a scanned PDF."
+        );
+
+        return;
+      }
+
+      const wordDocument =
+        createWordDocument(fullText);
+
+      const blob =
+        new Blob(
+          [wordDocument],
+          {
+            type:
+              "application/msword"
+          }
+        );
+
+      const url =
+        URL.createObjectURL(blob);
+
+      const download =
+        document.getElementById("download");
+
+      download.href = url;
+
+      document.getElementById("resultText").textContent =
+        "Successfully extracted text from " +
+        pdf.numPages +
+        " page(s).";
+
+      result.style.display = "block";
+
+    } catch (err) {
+
+      showError(
+        "Unable to convert this PDF. Please try another PDF file."
+      );
+
+    } finally {
+
+      button.disabled = false;
+      loading.style.display = "none";
+
+    }
+  };
+
+  function createWordDocument(text) {
+
+    const escaped =
+      escapeHTML(text);
+
+    return `
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Toolora PDF Conversion</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 40px;
+}
+p {
+  margin-bottom: 12px;
+}
+</style>
+</head>
+<body>
+${escaped
+  .split(/\n\n+/)
+  .map(paragraph =>
+    "<p>" +
+    paragraph
+      .replace(/\n/g, "<br>")
+    +
+    "</p>"
+  )
+  .join("")}
+</body>
+</html>
+    `;
+  }
+
+  function escapeHTML(text) {
+
+    return text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function formatBytes(bytes) {
+
+    if (bytes === 0) {
+      return "0 Bytes";
+    }
+
+    const units = [
+      "Bytes",
+      "KB",
+      "MB",
+      "GB"
+    ];
+
+    const i =
+      Math.floor(
+        Math.log(bytes) /
+        Math.log(1024)
+      );
+
+    return (
+      bytes /
+      Math.pow(1024, i)
+    ).toFixed(2) +
+      " " +
+      units[i];
+  }
+
+  function showError(message) {
+
+    const error =
+      document.getElementById("error");
+
+    error.textContent = message;
+    error.style.display = "block";
+  }
+
+</script>
+
+</body>
+</html>
