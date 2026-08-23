@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Toolora - Free online calculators, converters, PDF tools, image tools, text tools and more.">
+  <meta name="robots" content="index, follow">
+  <title>Toolora - Free Online Tools</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f8fb;
+      color: #172033;
+      line-height: 1.5;
+    }
+
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: auto;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      color: #2563eb;
+    }
+
+    .hero {
+      max-width: 900px;
+      margin: 45px auto 30px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: #64748b;
+      margin-bottom: 25px;
+    }
+
+    .search {
+      width: 100%;
+      max-width: 650px;
+      padding: 17px 20px;
+      border: 1px solid #dbe1ea;
+      border-radius: 14px;
+      font-size: 16px;
+      outline: none;
+      background: white;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .section {
+      margin: 35px 0;
+    }
+
+    .section h2 {
+      margin-bottom: 18px;
+      font-size: 24px;
+    }
+
+    .tools {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+    }
+
+    .tool {
+      background: white;
+      border: 1px solid #e6eaf0;
+      border-radius: 14px;
+      padding: 20px;
+      text-decoration: none;
+      color: #172033;
+      transition: 0.2s;
+    }
+
+    .tool:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+    }
+
+    .tool-icon {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .tool h3 {
+      font-size: 17px;
+      margin-bottom: 5px;
+    }
+
+    .tool p {
+      font-size: 14px;
+      color: #64748b;
+    }
+
+    footer {
+      margin-top: 50px;
+      padding: 30px 20px;
+      text-align: center;
+      background: white;
+      border-top: 1px solid #e5e7eb;
+      color: #64748b;
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        margin-top: 25px;
+      }
+
+      .hero h1 {
+        font-size: 30px;
+      }
+
+      .tools {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">Toolora</div>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Free Online Tools</h1>
+  <p>Simple, fast and useful tools for everyday tasks.</p>
+  <input
+    class="search"
+    type="search"
+    placeholder="🔍 What do you need?"
+    onkeyup="searchTools(this.value)"
+  >
+</section>
+
+<main class="container">
+
+  <section class="section">
+    <h2>⭐ Popular Tools</h2>
+
+    <div class="tools" id="toolList">
+
+      <a class="tool" href="/percentage-calculator">
+        <div class="tool-icon">📊</div>
+        <h3>Percentage Calculator</h3>
+        <p>Calculate percentages quickly and easily.</p>
+      </a>
+
+      <a class="tool" href="/age-calculator">
+        <div class="tool-icon">🎂</div>
+        <h3>Age Calculator</h3>
+        <p>Calculate your exact age from your date of birth.</p>
+      </a>
+
+      <a class="tool" href="/calculator">
+        <div class="tool-icon">🧮</div>
+        <h3>Calculator</h3>
+        <p>Perform everyday mathematical calculations.</p>
+      </a>
+
+      <a class="tool" href="/unit-converter">
+        <div class="tool-icon">🔄</div>
+        <h3>Unit Converter</h3>
+        <p>Convert length, weight, temperature and more.</p>
+      </a>
+
+      <a class="tool" href="/currency-converter">
+        <div class="tool-icon">💱</div>
+        <h3>Currency Converter</h3>
+        <p>Convert currencies quickly.</p>
+      </a>
+
+      <a class="tool" href="/word-character-counter">
+        <div class="tool-icon">✍️</div>
+        <h3>Word & Character Counter</h3>
+        <p>Count words, characters and spaces instantly.</p>
+      </a>
+
+      <a class="tool" href="/image-compressor">
+        <div class="tool-icon">🖼️</div>
+        <h3>Image Compressor</h3>
+        <p>Reduce image file size online.</p>
+      </a>
+
+      <a class="tool" href="/image-resizer">
+        <div class="tool-icon">📐</div>
+        <h3>Image Resizer</h3>
+        <p>Resize images to your required dimensions.</p>
+      </a>
+
+      <a class="tool" href="/pdf-compressor">
+        <div class="tool-icon">📄</div>
+        <h3>PDF Compressor</h3>
+        <p>Reduce PDF file size.</p>
+      </a>
+
+      <a class="tool" href="/pdf-to-word">
+        <div class="tool-icon">📑</div>
+        <h3>PDF to Word</h3>
+        <p>Convert PDF documents to editable Word files.</p>
+      </a>
+
+      <a class="tool" href="/word-to-pdf">
+        <div class="tool-icon">📝</div>
+        <h3>Word to PDF</h3>
+        <p>Convert documents into PDF files.</p>
+      </a>
+
+      <a class="tool" href="/qr-code-generator">
+        <div class="tool-icon">🔳</div>
+        <h3>QR Code Generator</h3>
+        <p>Create QR codes quickly.</p>
+      </a>
+
+      <a class="tool" href="/password-generator">
+        <div class="tool-icon">🔐</div>
+        <h3>Password Generator</h3>
+        <p>Generate strong random passwords.</p>
+      </a>
+
+      <a class="tool" href="/bmi-calculator">
+        <div class="tool-icon">⚖️</div>
+        <h3>BMI Calculator</h3>
+        <p>Calculate your Body Mass Index.</p>
+      </a>
+
+      <a class="tool" href="/online-timer">
+        <div class="tool-icon">⏱️</div>
+        <h3>Online Timer</h3>
+        <p>Set a simple countdown timer.</p>
+      </a>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Toolora. Free online tools.</p>
+</footer>
+
+<script>
+function searchTools(query) {
+  query = query.toLowerCase();
+
+  const tools = document.querySelectorAll(".tool");
+
+  tools.forEach(function(tool) {
+    const text = tool.innerText.toLowerCase();
+
+    if (text.includes(query)) {
+      tool.style.display = "";
+    } else {
+      tool.style.display = "none";
+    }
+  });
+}
+</script>
+
+</body>
+  </html>
