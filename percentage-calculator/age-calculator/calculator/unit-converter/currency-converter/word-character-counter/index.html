@@ -1,0 +1,368 @@
+
+     <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Free online Word and Character Counter. Count words, characters, sentences and reading time instantly.">
+  <meta name="robots" content="index, follow">
+
+  <title>Word & Character Counter - Toolora</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f8fb;
+      color: #172033;
+      line-height: 1.6;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav {
+      max-width: 900px;
+      margin: auto;
+      padding: 16px 20px;
+    }
+
+    .logo {
+      color: #2563eb;
+      font-size: 25px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #64748b;
+    }
+
+    .counter {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 280px;
+      padding: 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      resize: vertical;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: #2563eb;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    button {
+      flex: 1;
+      padding: 13px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .clear {
+      background: #64748b;
+    }
+
+    .clear:hover {
+      background: #475569;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .stat {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      color: #2563eb;
+      font-size: 23px;
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      color: #64748b;
+      font-size: 13px;
+    }
+
+    .content {
+      margin-top: 25px;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 25px;
+    }
+
+    .content h2 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .content h2:first-child {
+      margin-top: 0;
+    }
+
+    .content p {
+      color: #475569;
+      margin-bottom: 12px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 25px;
+      text-align: center;
+      background: white;
+      color: #64748b;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    @media (max-width: 650px) {
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .counter,
+      .content {
+        padding: 20px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="/">Toolora</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <a class="back" href="/">← Back to Toolora</a>
+
+  <section class="hero">
+    <h1>Word & Character Counter</h1>
+    <p>Count words, characters, sentences and reading time instantly.</p>
+  </section>
+
+  <section class="counter">
+
+    <textarea
+      id="textInput"
+      placeholder="Type or paste your text here..."
+      oninput="countText()"
+    ></textarea>
+
+    <div class="buttons">
+      <button onclick="copyText()">Copy Text</button>
+      <button class="clear" onclick="clearText()">Clear</button>
+    </div>
+
+    <div class="stats">
+
+      <div class="stat">
+        <strong id="words">0</strong>
+        <span>Words</span>
+      </div>
+
+      <div class="stat">
+        <strong id="characters">0</strong>
+        <span>Characters</span>
+      </div>
+
+      <div class="stat">
+        <strong id="sentences">0</strong>
+        <span>Sentences</span>
+      </div>
+
+      <div class="stat">
+        <strong id="readingTime">0 min</strong>
+        <span>Reading Time</span>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="content">
+
+    <h2>What is a Word Counter?</h2>
+
+    <p>
+      A word counter is an online tool that counts the number of
+      words and characters in your text. It is useful for students,
+      writers, bloggers and social media users.
+    </p>
+
+    <h2>How to Use the Word Counter</h2>
+
+    <p>
+      Type or paste your text into the text box. The word,
+      character, sentence and estimated reading time counts
+      update automatically.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <p>
+      <strong>Does the counter work automatically?</strong><br>
+      Yes. The statistics update as you type or paste text.
+    </p>
+
+    <p>
+      <strong>Does it count spaces?</strong><br>
+      The character count includes spaces and punctuation.
+    </p>
+
+    <p>
+      <strong>Is the tool free?</strong><br>
+      Yes. Toolora's Word & Character Counter is free to use.
+    </p>
+
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Toolora. Free online tools.</p>
+</footer>
+
+<script>
+
+function countText() {
+
+  const text = document.getElementById("textInput").value;
+
+  const characters = text.length;
+
+  const trimmedText = text.trim();
+
+  const words = trimmedText === ""
+    ? 0
+    : trimmedText.split(/\s+/).length;
+
+  const sentenceMatches = text.match(/[.!?]+(?=\s|$)/g);
+
+  const sentences = sentenceMatches
+    ? sentenceMatches.length
+    : 0;
+
+  const readingMinutes = words === 0
+    ? 0
+    : Math.ceil(words / 200);
+
+  document.getElementById("words").textContent = words;
+
+  document.getElementById("characters").textContent = characters;
+
+  document.getElementById("sentences").textContent = sentences;
+
+  document.getElementById("readingTime").textContent =
+    readingMinutes + " min";
+}
+
+function clearText() {
+
+  document.getElementById("textInput").value = "";
+
+  countText();
+
+}
+
+function copyText() {
+
+  const text = document.getElementById("textInput").value;
+
+  if (text.trim() === "") {
+    return;
+  }
+
+  navigator.clipboard.writeText(text)
+    .then(function() {
+      alert("Text copied!");
+    })
+    .catch(function() {
+      alert("Unable to copy text.");
+    });
+}
+
+</script>
+
+</body>
+</html>   
