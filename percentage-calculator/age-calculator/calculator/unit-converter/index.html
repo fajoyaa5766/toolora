@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Free Unit Converter for length, weight and temperature.">
+  <meta name="robots" content="index, follow">
+
+  <title>Unit Converter - Toolora</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f8fb;
+      color: #172033;
+      line-height: 1.6;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav {
+      max-width: 900px;
+      margin: auto;
+      padding: 16px 20px;
+    }
+
+    .logo {
+      color: #2563eb;
+      font-size: 25px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #64748b;
+    }
+
+    .converter {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    .group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    select,
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 16px;
+      background: white;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: 10px;
+      background: #eff6ff;
+      text-align: center;
+      display: none;
+    }
+
+    .result strong {
+      color: #2563eb;
+      font-size: 24px;
+    }
+
+    .content {
+      margin-top: 25px;
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .content h2 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .content h2:first-child {
+      margin-top: 0;
+    }
+
+    .content p {
+      color: #475569;
+      margin-bottom: 12px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 25px;
+      text-align: center;
+      background: white;
+      color: #64748b;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .converter,
+      .content {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="/">Toolora</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <a class="back" href="/">← Back to Toolora</a>
+
+  <section class="hero">
+    <h1>Unit Converter</h1>
+    <p>Convert length, weight and temperature quickly.</p>
+  </section>
+
+  <section class="converter">
+
+    <div class="group">
+      <label for="category">Conversion Type</label>
+
+      <select id="category" onchange="updateUnits()">
+        <option value="length">Length</option>
+        <option value="weight">Weight</option>
+        <option value="temperature">Temperature</option>
+      </select>
+    </div>
+
+    <div class="group">
+      <label for="value">Value</label>
+
+      <input
+        type="number"
+        id="value"
+        placeholder="Enter value"
+        step="any"
+      >
+    </div>
+
+    <div class="group">
+      <label for="fromUnit">From</label>
+
+      <select id="fromUnit"></select>
+    </div>
+
+    <div class="group">
+      <label for="toUnit">To</label>
+
+      <select id="toUnit"></select>
+    </div>
+
+    <button onclick="convertUnit()">
+      Convert
+    </button>
+
+    <div class="result" id="result">
+      <div>Result</div>
+      <strong id="answer"></strong>
+    </div>
+
+  </section>
+
+  <section class="content">
+
+    <h2>What is a Unit Converter?</h2>
+
+    <p>
+      A unit converter helps you convert measurements between
+      different units such as meters, kilometers, kilograms,
+      pounds and temperature scales.
+    </p>
+
+    <h2>How to Use the Unit Converter</h2>
+
+    <p>
+      Select a conversion type, enter a value, choose the original
+      unit and select the unit you want to convert to.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <p>
+      <strong>Which units are supported?</strong><br>
+      This tool currently supports length, weight and temperature
+      conversions.
+    </p>
+
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Toolora. Free online tools.</p>
+</footer>
+
+<script>
+
+const units = {
+  length: {
+    meter: "Meter",
+    kilometer: "Kilometer",
+    centimeter: "Centimeter",
+    millimeter: "Millimeter",
+    mile: "Mile",
+    yard: "Yard",
+    foot: "Foot",
+    inch: "Inch"
+  },
+
+  weight: {
+    kilogram: "Kilogram",
+    gram: "Gram",
+    milligram: "Milligram",
+    pound: "Pound",
+    ounce: "Ounce"
+  },
+
+  temperature: {
+    celsius: "Celsius",
+    fahrenheit: "Fahrenheit",
+    kelvin: "Kelvin"
+  }
+};
+
+const lengthToMeter = {
+  meter: 1,
+  kilometer: 1000,
+  centimeter: 0.01,
+  millimeter: 0.001,
+  mile: 1609.344,
+  yard: 0.9144,
+  foot: 0.3048,
+  inch: 0.0254
+};
+
+const weightToGram = {
+  kilogram: 1000,
+  gram: 1,
+  milligram: 0.001,
+  pound: 453.59237,
+  ounce: 28.349523125
+};
+
+function updateUnits() {
+
+  const category = document.getElementById("category").value;
+
+  const fromUnit = document.getElementById("fromUnit");
+  const toUnit = document.getElementById("toUnit");
+
+  fromUnit.innerHTML = "";
+  toUnit.innerHTML = "";
+
+  for (const key in units[category]) {
+
+    const option1 = document.createElement("option");
+    option1.value = key;
+    option1.textContent = units[category][key];
+
+    const option2 = document.createElement("option");
+    option2.value = key;
+    option2.textContent = units[category][key];
+
+    fromUnit.appendChild(option1);
+    toUnit.appendChild(option2);
+  }
+}
+
+function convertUnit() {
+
+  const category = document.getElementById("category").value;
+  const value = parseFloat(document.getElementById("value").value);
+  const from = document.getElementById("fromUnit").value;
+  const to = document.getElementById("toUnit").value;
+
+  const resultBox = document.getElementById("result");
+  const answer = document.getElementById("answer");
+
+  if (isNaN(value)) {
+    answer.textContent = "Please enter a value.";
+    resultBox.style.display = "block";
+    return;
+  }
+
+  let result;
+
+  if (category === "length") {
+
+    const meters = value * lengthToMeter[from];
+    result = meters / lengthToMeter[to];
+
+  } else if (category === "weight") {
+
+    const grams = value * weightToGram[from];
+    result = grams / weightToGram[to];
+
+  } else if (category === "temperature") {
+
+    let celsius;
+
+    if (from === "celsius") {
+      celsius = value;
+    } else if (from === "fahrenheit") {
+      celsius = (value - 32) * 5 / 9;
+    } else {
+      celsius = value - 273.15;
+    }
+
+    if (to === "celsius") {
+      result = celsius;
+    } else if (to === "fahrenheit") {
+      result = (celsius * 9 / 5) + 32;
+    } else {
+      result = celsius + 273.15;
+    }
+  }
+
+  answer.textContent = Number(result.toFixed(8));
+
+  resultBox.style.display = "block";
+}
+
+updateUnits();
+
+</script>
+
+</body>
+</html>
